@@ -1,12 +1,15 @@
 import json
 
-with open('data/tagify-tracks/tagify-backup-2026-10-14.json') as file:
+with open('deduplicated-tagify-backup-2026-11-07.json') as file:
+#with open('data/tagify-tracks/tagify-backup-2026-11-07.json') as file:
     data = json.load(file)
+
+track_data = data['tagData']['tracks']
 
 unique_tracks = set()
 unique_isrcs = set()
 duplicates = set()
-for track_id, content in data['tagData']['tracks'].items():
+for track_id, content in track_data.items():
     if 'name' not in content.keys():
         #print("Track has no name")
         #print(content)
@@ -16,12 +19,13 @@ for track_id, content in data['tagData']['tracks'].items():
         #print(content)
         continue
     name, artist = content['name'], content['artists']
+    # Name artist duplicates are iffy
     if (name, artist) not in unique_tracks:
         unique_tracks.add((name, artist))
-    #else:
-    #    print("Duplicate found:", name, artist)
-    #    duplicates.add((name, artist))
-    #    continue
+    else:
+        print("Duplicate found:", name, artist)
+        duplicates.add((name, artist))
+        continue
     if 'recordingIdentity' not in content.keys():
         continue
     isrc = content['recordingIdentity']['isrc']
@@ -32,10 +36,3 @@ for track_id, content in data['tagData']['tracks'].items():
         duplicates.add((name, artist))
 
 print("Duplicate count:", len(duplicates))
-
-for track_id, content in data['tagData']['tracks'].items():
-    if 'name' not in content.keys() or 'artists' not in content.keys():
-        continue
-    name, artist = content['name'], content['artists']
-    if (name, artist) in duplicates and name == 'Violet':
-        print(track_id, content)

@@ -18,6 +18,7 @@ Todos
         Top 100s of the last 10 years
     Find "tagged" songs that aren't *liked*
     Find artists with inconsistent genres (i.e. some are indie some aren't etc)
+    manually remove terere obande
 
 Playlists to make
     Doo-wop
