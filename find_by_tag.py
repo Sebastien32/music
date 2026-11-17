@@ -16,6 +16,8 @@ track_data = data['tagData']['tracks']
 
 matches = []
 
+tag_id = 'tag_1ede6053-7f83-475b-8977-c551d3adeb7d'
+
 for track_id, content in track_data.items():
     if 'name' not in content.keys():
         #print("Track has no name")
@@ -32,11 +34,13 @@ for track_id, content in track_data.items():
     name, artist = content['name'], content['artists']
     # can check by content['rating'] as well for favoites
     if tag_id in content['tagIds']:
-        matches.append(name)
+        matches.append(content)
 
-matches = sorted(matches)
+matches = sorted(matches, key = lambda x: x['name'])
 
 for t in matches:
-    print(t)
+    print(t['name'])
 
 print(len(matches))
+
+print(t)

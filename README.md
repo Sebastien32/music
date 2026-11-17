@@ -19,6 +19,8 @@ Todos
     Find "tagged" songs that aren't *liked*
     Find artists with inconsistent genres (i.e. some are indie some aren't etc)
     manually remove terere obande
+    be aware deduplicate has removed tags from some songs that were liked
+        find "liked" songs that are not tagged (swap with a version that is tagged but not liked?)
 
 Playlists to make
     Doo-wop
